@@ -5,9 +5,7 @@ import { SandboxPage } from '../Pages/SandboxPage';
 
     let browser:Browser;
     let page:Page;
-
     let sandBox;
-
 
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
@@ -108,14 +106,12 @@ import { SandboxPage } from '../Pages/SandboxPage';
 
         })
         
-        test.only('Validar elementos de la tabla estatica', async({page}) => {
+        test('Validar elementos de la tabla estatica', async({}) => {
 
             await test.step('Valida los elementos de la tabla', async() => {
-                //CONSTANTE QUE EXTRAE CADA UNO DE LA LISTA DE ELEMENTOS SELECCIONADOS POR MEDIO DE LA FUNCION 'ELEMENTS.MAP'
-                //const valoresColumnaNombre= await page.$$eval('//div[h2[text()="Tabla estática"]]/table/tbody/tr/td[2]', elements => elements.map(element => element.textContent));
-                
+
+                const valoresColumnaNombre= await page.$$eval('//div[h2[text()="Tabla estática"]]/table/tbody/tr/td[2]', elements => elements.map(element => element.textContent));
                 const nombreEsperado = ['Messi','Ronaldo','Mbappe'];
-                const valoresColumnaNombre=sandBox.elementsOfTheBoard(page);
                 expect(valoresColumnaNombre).toEqual(nombreEsperado);
 
             })
@@ -127,7 +123,7 @@ import { SandboxPage } from '../Pages/SandboxPage';
             })
         })
 
-        test('Validar elementos de la tabla dinamica', async({page}) => {
+        test('Validar elementos de la tabla dinamica', async({}) => {
 
             await test.step('Valida los elementos de la tabla dinamica que no sean los mismos', async() => {
                 //CONSTANTE QUE EXTRAE CADA UNO DE LA LISTA DE ELEMENTOS SELECCIONADOS POR MEDIO DE LA FUNCION 'ELEMENTS.MAP'
@@ -151,21 +147,15 @@ import { SandboxPage } from '../Pages/SandboxPage';
             })
         })
 
-        test('Valida pop up', async({page}) => {
-            //CAMBIA EL ESTATUS DE LA EJECUCION DE FALIDO A PASADO Y AL REVEZ
-            //test.fail();
-            //AGREGA UNA ANOTACION EN EL REPORTE 
+        test('Valida pop up', async({}) => { 
             test.info().annotations.push({
                 type: 'HU 5214',
                 description: 'Agregar una anotacion a un test espacifico'
             });
 
-            await test.step('Go to principal page', async() =>{
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
-            })
             await test.step('Valida el pop up', async() => {
-                await page.getByRole('button', { name: 'Mostrar popup' }).click();
-                await expect(page.getByText('¿Viste? ¡Apareció un Pop-up!'),'Texto del pop up no nes el mismo').toHaveText('¿Viste? ¡Apareció un Pop-up!');
+                await sandBox.showPopUp(page);
+                await expect(sandBox.textPopup,'Texto del pop up no nes el mismo').toHaveText('¿Viste? ¡Apareció un Pop-up!');
             })
         })
 

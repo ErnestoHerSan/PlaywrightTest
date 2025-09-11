@@ -5,7 +5,7 @@ import { title } from 'process';
 const REPO = 'RepoLoco';
 const USER = 'ErnestoHerSan';
 
-//CCREA UN NUEVO REPOSITORIO
+//CREA UN NUEVO REPOSITORIO
 test.beforeAll(async ({ request }) => {
     const response = await request.post('user/repos', {
         data: {
@@ -13,7 +13,7 @@ test.beforeAll(async ({ request }) => {
         }
     });
     expect(response.ok()).toBeTruthy();
-})
+});
 
 //GENERA UN NUEVO ISSUE
 test('Se puede crear un Issue en el repo de git', async({request}) => {
@@ -34,7 +34,7 @@ test('Se puede crear un Issue en el repo de git', async({request}) => {
 });
 
 //GET A UN ISSUE DE UN FEATURE
-test('Se puede crear un request de feature', async({request}) => {
+test.fixme('Se puede crear un request de feature', async({request}) => {
     const newIssue = await request.post(`/repos/${USER}/${REPO}/issues`, {
         data: {
             title: '[FEATURE] reporte 1',

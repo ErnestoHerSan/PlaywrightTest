@@ -61,7 +61,7 @@ export default defineConfig({
         baseURL: 'https://api.github.com',
         extraHTTPHeaders: {
           'Accept': 'Application/vnd.github.v3+json',
-          'Authorization': `token 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`,
+          'Authorization': `token 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1`,
         }
       },
     },

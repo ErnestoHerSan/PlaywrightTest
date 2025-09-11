@@ -16,6 +16,8 @@ export class SandboxPage{
     readonly pizzaCheckbox: Locator;
     readonly heladoCheckbox: Locator;
     readonly tortaCheckbox: Locator; 
+    readonly showPopup: Locator;
+    readonly textPopup: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -32,6 +34,8 @@ export class SandboxPage{
         this.pastaCheckbox = page.getByRole('checkbox', { name: 'Pasta 🍝' });
         this.heladoCheckbox = page.getByText('Helado 🍧');
         this.tortaCheckbox = page.getByText('Torta 🍰');
+        this.showPopup = page.getByRole('button', { name: 'Mostrar popup' });
+        this.textPopup = page.getByText('¿Viste? ¡Apareció un Pop-up!');
     }
 
     async checkPasta(){
@@ -80,23 +84,10 @@ export class SandboxPage{
 
     }
 
-    async elementsOfTheBoard(page){
+    async showPopUp(page){
 
-        const valoresColumnaNombre= await page.$$eval('//div[h2[text()="Tabla estática"]]/table/tbody/tr/td[2]', elements => elements.map(element => element.textContent));
-        console.log(valoresColumnaNombre);
-        return valoresColumnaNombre;
-
-    }
-
-    async validateelementsOfTheDinamicBoard(page){
-
-        //CONSTANTE QUE EXTRAE CADA UNO DE LA LISTA DE ELEMENTOS SELECCIONADOS POR MEDIO DE LA FUNCION 'ELEMENTS.MAP'
-        const valoresTablaDinamica= await page.$$eval('//div[h2[text()="Tabla dinámica"]]/table/tbody/tr/td', elements => elements.map(element => element.textContent));
-        console.log(valoresTablaDinamica);
-        await page.reload();
-        const valoresTablaDinamicaReload= await page.$$eval('//div[h2[text()="Tabla dinámica"]]/table/tbody/tr/td', elements => elements.map(element => element.textContent));
-        console.log(valoresTablaDinamicaReload);
-
+        await this.showPopup.click();
+        
     }
 
 
