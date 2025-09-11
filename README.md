@@ -26,3 +26,7 @@ For this project use VS code and install the extensions:
 
 # Execute
 
+Open a new terminal and type 
+
+npx playwright test WEB/AutomationSandbox
+
